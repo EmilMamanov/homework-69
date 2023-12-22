@@ -89,6 +89,7 @@ export const searchShows = createAsyncThunk('search/searchShows', async (query: 
     }
 });
 
+
 const searchSlice = createSlice({
     name: 'search',
     initialState,
@@ -106,7 +107,7 @@ const searchSlice = createSlice({
                 score: 0,
                 show: {
                     ...show,
-                    name: show.show && typeof show.show.name === 'string' ? show.show.name : 'Unknown Name',
+                    name: show.show?.name || 'Unknown Name',
                 }
             })) as Draft<{ score: number; show: Show }[]>;
         });

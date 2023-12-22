@@ -1,21 +1,21 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useSelector, } from 'react-redux';
+import {useParams} from "react-router-dom";
 import { RootState } from '../app/store';
 import { Show } from '../app/slices/searchSlice';
 
 const ShowDetails: React.FC = () => {
-    const { id } = useParams<{ id: string }>(); // Убедимся, что id имеет тип string
-
-    console.log('id:', id);
+    const { id } = useParams();
 
     const selectedShow = useSelector<RootState, Show | undefined>(
         (state) => {
             const showResult = state.search.searchResults.find(result => result.show.id.toString() === id);
             return showResult ? showResult.show : undefined;
+
         }
     );
 
+    console.log('id:', id);
     console.log('selectedShow:', selectedShow);
 
     if (id === undefined || !selectedShow) {
